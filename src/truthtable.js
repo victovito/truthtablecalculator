@@ -12,7 +12,6 @@ class TruthTable {
     /** @param {string} expression  */
     constructor(expression) {
         this.expression = new BooleanExpression(expression);
-        console.log(this.expression.parsed);
         this.propositions = this.expression.getPropositions();
         this.generatePropositionColumns();
         for (let operation of this.expression.getOperations()) {

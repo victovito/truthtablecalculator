@@ -191,7 +191,11 @@ function parseUnary(tokens, operators) {
             parsed.push([tokens[i], term]);
             i += 1;
         } else {
-            parsed.push(tokens[i]);
+            if (tokens[i] instanceof Array) {
+                parsed.push(parseUnary(tokens[i], operators));
+            } else {
+                parsed.push(tokens[i]);
+            }
         }
     }
     return parsed;
@@ -242,17 +246,29 @@ function nodeToStringRecursively(node) {
         if (token instanceof Array) {
             result += "(" + nodeToStringRecursively(token) + ") ";
         } else {
-            result += token + (token == "!" ? "" : " ");
+            result += convertedSymbol(token) + (token == "!" ? "" : " ");
         }
     }
     return result.slice(0, result.length - 1);
+}
+
+/** @type {string} */
+function convertedSymbol(symbol) {
+    const updatedSymbols = [
+        "¬", "⇔", "⇒", "∧", "∨"
+    ];
+    const index = Object.keys(symbols).indexOf(symbol);
+    if (index != -1) {
+        return updatedSymbols[index];
+    } else {
+        return symbol;
+    }
 }
 
 function nodeToOperation(node) {
     let operator;
     let terms = [];
     for (let token of node) {
-        const operatorIndex = Object.keys(symbols).indexOf(token);
         if (Object.keys(symbols).indexOf(token) != -1) {
             operator = symbols[token];
         }
