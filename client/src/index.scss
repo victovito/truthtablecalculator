@@ -1,0 +1,19 @@
+@import "./Colors.scss";
+
+body {
+  margin: 0;
+  color: $secondary;
+  background-color: $main;
+  font-size: 16px;
+  font-family: 'Poppins', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  color: inherit;
+  font-size: inherit;
+  font-family: inherit;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}

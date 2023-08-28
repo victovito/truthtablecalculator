@@ -1,0 +1,9 @@
+@import "./Colors.scss";
+
+$morph-up: 6px 6px 8px 0 $shadow,
+    -4px -4px 16px 0 $rim;
+$morph-down: 6px 6px 8px 0 $rim,
+    -4px -4px 6px 0 $shadow;
+$morph-down-inset: 6px 6px 8px 0 $shadow inset,
+    -4px -4px 16px 0 $rim inset;
+$round-corner: 10px;

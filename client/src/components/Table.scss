@@ -1,0 +1,47 @@
+@import "../Variables.scss";
+
+.table-container {
+    padding: $round-corner;
+    border-radius: $round-corner;
+    box-shadow: $morph-up;
+    
+    table {
+        border-collapse: collapse;
+
+        th {
+            padding: 20px 20px 10px 20px;
+            text-align: center;
+        }
+        td {
+            padding: 10px 20px;
+        }
+    
+        tr {
+            border-bottom: 1px solid $rim;
+            td, th {
+                border-right: 1px solid $rim;
+                &:last-of-type {
+                    border-right: none;
+                }
+            }
+            
+            &:last-of-type {
+                border-bottom: none;
+            }
+            &:hover {
+                background: $secondary;
+                color: $main;
+                td, th {
+                    border-right: 1px solid $shadow;
+                    &:last-of-type {
+                        border-right: none;
+                    }
+                }
+                &:first-of-type {
+                    background: none;
+                    color: inherit;
+                }
+            }
+        }
+    }
+}
