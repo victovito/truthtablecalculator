@@ -24,7 +24,9 @@ export default class BooleanExpression {
                     findPropositionRecursively(token);
                 }
                 else if (Object.keys(symbols).indexOf(token) === -1) {
-                    propositions[token] = true;
+                    if (!token.match(/[01]/)) {
+                        propositions[token] = true;
+                    }
                 }
             }
         }
@@ -152,7 +154,7 @@ function validateExpression(expression) {
                 return str.slice(0, symbol.length);
             }
         }
-        if (str[0].match(/[a-z]/i)) {
+        if (str[0].match(/[a-z]/i) || str[0].match(/[01]/)) {
             return symbols[0];
         }
         return null;
@@ -419,7 +421,11 @@ function nodeToOperation(node, useLatex) {
         else if (token instanceof Array) {
             terms.push(nodeToStringRecursively(token, useLatex));
         } else {
-            terms.push(token);
+            if (token.match(/[01]/)) {
+                terms.push(token == "1" ? true : false);
+            } else {
+                terms.push(token);
+            }
         }
     }
     return (

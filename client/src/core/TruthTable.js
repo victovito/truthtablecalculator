@@ -55,13 +55,17 @@ class TruthTable {
      * @param {Operation} operation 
      */
     addColumn(name, operation) {
+        const isbool = val => val === false || val === true;
         if (this.getColumn(name)) return;
         const column = new TruthTableColumn(name);
-        const a = this.getColumn(operation.a)?.data;
-        const b = this.getColumn(operation.b)?.data;
+        const a = isbool(operation.a) ? operation.a : this.getColumn(operation.a)?.data;
+        const b = isbool(operation.b) ? operation.b : this.getColumn(operation.b)?.data;
         for (let i = 0; i < this.rowsCount; i++) {
             column.data.push(
-                operation.lambda(a[i], b ? b[i] : undefined)
+                operation.lambda(
+                    isbool(a) ? a : a[i],
+                    isbool(b) ? b : (b ? b[i] : undefined)
+                )
             );
         }
         this.data.push(column);
