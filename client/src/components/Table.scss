@@ -4,6 +4,9 @@
     padding: $round-corner;
     border-radius: $round-corner;
     box-shadow: $morph-up;
+    max-width: 100%;
+    overflow-x: auto;
+    position: relative;
     
     table {
         border-collapse: collapse;
@@ -11,6 +14,7 @@
         th {
             padding: 20px 20px 10px 20px;
             text-align: center;
+            position: sticky;
         }
         td {
             padding: 10px 20px;
@@ -24,7 +28,7 @@
                     border-right: none;
                 }
             }
-            
+
             &:last-of-type {
                 border-bottom: none;
             }

@@ -31,7 +31,7 @@ export default class BooleanExpression {
             }
         }
         findPropositionRecursively(this.parsed);
-        return Object.keys(propositions);
+        return Object.keys(propositions).sort();
     }
 
     getOperations(useLatex = false) {
@@ -376,8 +376,9 @@ function nodeToStringRecursively(node, useLatex) {
     for (let token of node) {
         if (token instanceof Array) {
             if (
-                Object.keys(symbols).indexOf(getNodeOperation(token)) >=
-                Object.keys(symbols).indexOf(getNodeOperation(node))
+                (Object.keys(symbols).indexOf(getNodeOperation(token)) >=
+                Object.keys(symbols).indexOf(getNodeOperation(node))) &&
+                (node.indexOf(getNodeOperation(token)) < node.indexOf(token))
             ) {
                 result += "(" + nodeToStringRecursively(token, useLatex) + ")";
             } else {
@@ -422,7 +423,7 @@ function nodeToOperation(node, useLatex) {
             terms.push(nodeToStringRecursively(token, useLatex));
         } else {
             if (token.match(/[01]/)) {
-                terms.push(token == "1" ? true : false);
+                terms.push(token === "1" ? true : false);
             } else {
                 terms.push(token);
             }
@@ -442,8 +443,13 @@ function nodeToOperation(node, useLatex) {
  * @prop {string} b
 */
 
-/**
- * @typedef BooleanExpressionValidation
- * @prop {boolean} valid
- * @prop {string} error
-*/
+export class BooleanExpressionValidation {
+    /** @type {boolean} */
+    valid;
+    /** @type {string} */
+    error;
+    constructor(valid, error) {
+        this.valid = valid;
+        this.error = error;
+    }
+}
