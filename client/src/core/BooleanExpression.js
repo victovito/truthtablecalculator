@@ -376,7 +376,7 @@ function nodeToStringRecursively(node, useLatex) {
     for (let token of node) {
         if (token instanceof Array) {
             if (
-                Object.keys(symbols).indexOf(getNodeOperation(token)) >
+                Object.keys(symbols).indexOf(getNodeOperation(token)) >=
                 Object.keys(symbols).indexOf(getNodeOperation(node))
             ) {
                 result += "(" + nodeToStringRecursively(token, useLatex) + ")";
